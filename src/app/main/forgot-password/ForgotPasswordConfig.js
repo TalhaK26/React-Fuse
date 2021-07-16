@@ -1,6 +1,6 @@
-import ResetPassword from './ResetPassword';
+import ForgotPassword from './ForgotPassword';
 
-const ResetPasswordConfig = {
+const ForgotPasswordConfig = {
 	settings: {
 		layout: {
             config: {
@@ -24,10 +24,10 @@ const ResetPasswordConfig = {
 	},
 	routes: [
 		{
-			path: '/reset-password',
-			component: ResetPassword
+			path: '/forgot-password',
+			component: ForgotPassword
 		},
 	]
 };
 
-export default ResetPasswordConfig;
+export default ForgotPasswordConfig;

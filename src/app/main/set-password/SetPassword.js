@@ -14,7 +14,11 @@ import * as yup from 'yup';
 import _ from '@lodash';
 
 const useStyles = makeStyles(theme => ({
-	root: {}
+	root: {
+		backgroundImage: 'url("assets/images/backgrounds/setpassword-bg.gif")',
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat'
+	}
 }));
 
 /**
@@ -55,7 +59,7 @@ function SetPassword() {
 				<motion.div initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}>
 					<Card className="w-full max-w-384">
 						<CardContent className="flex flex-col items-center justify-center p-16 sm:p-24 md:p-32">
-							<img className="w-128 m-32" src="assets/images/logos/fuse.svg" alt="logo" />
+							<img className="m-32" src="assets/images/logos/lyftron-logo-big.png" alt="logo" />
 
 							<Typography variant="h6" className="mt-16 mb-24 font-semibold text-18 sm:text-24">
 								Set your password
@@ -117,7 +121,7 @@ function SetPassword() {
 							</form>
 
 							<div className="flex flex-col items-center justify-center pt-32 pb-24">
-								<Link className="font-normal" to="/pages/auth/login">
+								<Link className="font-normal" to="/login">
 									Go back to login
 								</Link>
 							</div>

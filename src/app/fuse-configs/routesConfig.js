@@ -3,14 +3,14 @@ import FuseUtils from '@fuse/utils';
 import ExampleConfig from 'app/main/example/ExampleConfig';
 import LoginConfig from 'app/main/login/LoginConfig';
 import RegisterConfig from 'app/main/register/RegisterConfig';
-import ResetPasswordConfig from 'app/main/reset-password/ResetPasswordConfig';
+import ForgotPasswordConfig from 'app/main/forgot-password/ForgotPasswordConfig';
 import SetPasswordConfig from 'app/main/set-password/SetPasswordConfig';
 import DashboardConfig from 'app/main/dashboard/DashboardConfig';
 
 
 const routeConfigs = [
 	// ExampleConfig,
-	ResetPasswordConfig, 
+	ForgotPasswordConfig, 
 	LoginConfig,
 	SetPasswordConfig,
 	RegisterConfig,

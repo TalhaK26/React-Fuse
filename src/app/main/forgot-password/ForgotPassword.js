@@ -14,7 +14,11 @@ import * as yup from 'yup';
 import _ from '@lodash';
 
 const useStyles = makeStyles(theme => ({
-	root: {}
+	root: {
+		backgroundImage: 'url("assets/images/backgrounds/forgot-bg.gif")',
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat'
+	}
 }));
 
 /**
@@ -35,7 +39,7 @@ const defaultValues = {
 	passwordConfirm: ''
 };
 
-function ResetPassword() {
+function FrogotPassword() {
 	const classes = useStyles();
 
 	const { control, formState, handleSubmit, reset } = useForm({
@@ -52,14 +56,14 @@ function ResetPassword() {
 
 	return (
 		<div className={clsx(classes.root, 'flex flex-col flex-auto items-center justify-center p-16 sm:p-32')}>
-			<div className="flex flex-col items-center justify-center w-full">
+			<div className="flex flex-col items-end justify-center w-full">
 				<motion.div initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}>
 					<Card className="w-full max-w-384">
 						<CardContent className="flex flex-col items-center justify-center p-16 sm:p-24 md:p-32">
-							<img className="w-128 m-32" src="assets/images/logos/fuse.svg" alt="logo" />
+							<img className="m-32" src="assets/images/logos/lyftron-logo-big.png" alt="logo" />
 
 							<Typography variant="h6" className="mt-16 mb-24 font-semibold text-18 sm:text-24">
-								Reset your password
+								Forgot your password?
 							</Typography>
 
 							<form
@@ -86,43 +90,7 @@ function ResetPassword() {
 										/>
 									)}
 								/>
-								<Controller
-									name="password"
-									control={control}
-									render={({ field }) => (
-										<TextField
-											{...field}
-											className="mb-16"
-											label="Password"
-											type="password"
-											name="password"
-											error={!!errors.password}
-											helperText={errors?.password?.message}
-											variant="outlined"
-											required
-											fullWidth
-										/>
-									)}
-								/>
-
-								<Controller
-									name="passwordConfirm"
-									control={control}
-									render={({ field }) => (
-										<TextField
-											{...field}
-											className="mb-16"
-											label="Password (Confirm)"
-											type="password"
-											error={!!errors.passwordConfirm}
-											helperText={errors?.passwordConfirm?.message}
-											variant="outlined"
-											required
-											fullWidth
-										/>
-									)}
-								/>
-
+								
 								<Button
 									variant="contained"
 									color="primary"
@@ -131,12 +99,12 @@ function ResetPassword() {
 									disabled={_.isEmpty(dirtyFields) || !isValid}
 									type="submit"
 								>
-									Reset my password
+									Send
 								</Button>
 							</form>
 
 							<div className="flex flex-col items-center justify-center pt-32 pb-24">
-								<Link className="font-normal" to="/pages/auth/login">
+								<Link className="font-normal" to="/login">
 									Go back to login
 								</Link>
 							</div>
@@ -148,4 +116,4 @@ function ResetPassword() {
 	);
 }
 
-export default ResetPassword;
+export default FrogotPassword;

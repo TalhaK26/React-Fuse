@@ -13,7 +13,7 @@ import { logoutUser } from 'app/auth/store/userSlice';
 
 function UserMenu(props) {
 	const dispatch = useDispatch();
-	const user = useSelector(({ auth }) => auth.user);
+	// const user = useSelector(({ auth }) => auth.user);
 
 	const [userMenu, setUserMenu] = useState(null);
 
@@ -30,19 +30,14 @@ function UserMenu(props) {
 			<Button className="min-h-40 min-w-40 px-0 md:px-16 py-0 md:py-6" onClick={userMenuClick}>
 				<div className="hidden md:flex flex-col mx-4 items-end">
 					<Typography component="span" className="font-semibold flex">
-						{user.data.displayName}
+						John Doe..
 					</Typography>
 					<Typography className="text-11 font-medium capitalize" color="textSecondary">
-						{user.role.toString()}
-						{(!user.role || (Array.isArray(user.role) && user.role.length === 0)) && 'Guest'}
+						Guest..
 					</Typography>
 				</div>
 
-				{user.data.photoURL ? (
-					<Avatar className="md:mx-4" alt="user photo" src={user.data.photoURL} />
-				) : (
-					<Avatar className="md:mx-4">{user.data.displayName[0]}</Avatar>
-				)}
+				<Avatar className="md:mx-4" alt="user photo" src="assets/images/avatars/Trevino.jpg" />
 			</Button>
 
 			<Popover
@@ -61,9 +56,9 @@ function UserMenu(props) {
 					paper: 'py-8'
 				}}
 			>
-				{!user.role || user.role.length === 0 ? (
+				{/* {!user.role || user.role.length === 0 ? ( */}
 					<>
-						<MenuItem component={Link} to="/login" role="button">
+						{/* <MenuItem component={Link} to="/login" role="button">
 							<ListItemIcon className="min-w-40">
 								<Icon>lock</Icon>
 							</ListItemIcon>
@@ -74,9 +69,9 @@ function UserMenu(props) {
 								<Icon>person_add</Icon>
 							</ListItemIcon>
 							<ListItemText primary="Register" />
-						</MenuItem>
+						</MenuItem> */}
 					</>
-				) : (
+				{/* ) : ( */}
 					<>
 						<MenuItem component={Link} to="/pages/profile" onClick={userMenuClose} role="button">
 							<ListItemIcon className="min-w-40">
@@ -102,7 +97,7 @@ function UserMenu(props) {
 							<ListItemText primary="Logout" />
 						</MenuItem>
 					</>
-				)}
+				{/* )} */}
 			</Popover>
 		</>
 	);

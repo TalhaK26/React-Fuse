@@ -5,7 +5,7 @@ import i18n from './i18nSlice';
 
 const createReducer = asyncReducers => (state, action) => {
 	const combinedReducer = combineReducers({
-		auth,
+		// auth,
 		fuse,
 		i18n,
 		...asyncReducers

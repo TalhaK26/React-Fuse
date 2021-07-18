@@ -15,9 +15,15 @@ import _ from '@lodash';
 
 const useStyles = makeStyles(theme => ({
 	root: {
+		background: 'linear-gradient(to right, #77679b 0%, rgb(217 181 129) 100%)',
+	},
+	rightSection: {
 		backgroundImage: 'url("assets/images/backgrounds/setpassword-bg.gif")',
         backgroundSize: '100% 100%',
         backgroundRepeat: 'no-repeat'
+	},
+	formContainer: {
+		borderRadius: '0 !important'
 	}
 }));
 
@@ -55,9 +61,15 @@ function SetPassword() {
 
 	return (
 		<div className={clsx(classes.root, 'flex flex-col flex-auto items-center justify-center p-16 sm:p-32')}>
-			<div className="flex flex-col items-center justify-center w-full">
+			<div 
+				// className="flex flex-col items-center justify-center w-full"
+				className="flex w-full max-w-400 md:max-w-3xl rounded-20 shadow-2xl overflow-hidden"
+			>	
+				<div className={clsx(classes.rightSection,'hidden md:flex flex-1 items-center justify-center p-64')}>
+					<div className="max-w-320"></div>
+				</div>
 				<motion.div initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}>
-					<Card className="w-full max-w-384">
+					<Card className={clsx(classes.formContainer,"w-full max-w-384")}>
 						<CardContent className="flex flex-col items-center justify-center p-16 sm:p-24 md:p-32">
 							<img className="m-32" src="assets/images/logos/lyftron-logo-big.png" alt="logo" />
 

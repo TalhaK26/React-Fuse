@@ -6,7 +6,9 @@ import RegisterConfig from 'app/main/register/RegisterConfig';
 import ForgotPasswordConfig from 'app/main/forgot-password/ForgotPasswordConfig';
 import SetPasswordConfig from 'app/main/set-password/SetPasswordConfig';
 import DashboardConfig from 'app/main/dashboard/DashboardConfig';
-
+import AppsConfig from 'app/main/apps/AppsConfig';
+import EnvironmentConfig from 'app/main/environment/EnvironmentConfig';
+import ProjectConfig from 'app/main/project/ProjectConfig';
 
 const routeConfigs = [
 	// ExampleConfig,
@@ -14,7 +16,10 @@ const routeConfigs = [
 	LoginConfig,
 	SetPasswordConfig,
 	RegisterConfig,
-	DashboardConfig
+	DashboardConfig,
+	AppsConfig,
+	EnvironmentConfig,
+	ProjectConfig
 ];
 
 const routes = [

@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 function Dashboard() {
 	const dispatch = useDispatch();
 	const widgets = useSelector(selectWidgetsEntities);
-
+console.log('widgets', widgets)
 	useEffect(() => {
 		dispatch(getWidgets());
 	}, [dispatch]);
@@ -48,6 +48,8 @@ function Dashboard() {
 
     return (
 		<div className="w-full">
+			<h2>Dashboard</h2>
+
 			<Widget1 data={widgets.widget1} />
 			<motion.div
 				className="flex flex-col md:flex-row sm:p-8 container"
@@ -152,6 +154,9 @@ function Dashboard() {
 					</div>
 				</div>
 			</motion.div>
+
+
+			
 		</div>
 	);
 }

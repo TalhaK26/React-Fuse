@@ -16,21 +16,37 @@ const navigationConfig = [
 		icon: 'apps',
 		children: [
 			{
-				id: 'example-component',
-				title: 'Example',
-				translate: 'EXAMPLE',
+				id: 'dashboard-component',
+				title: 'Dashboard',
+				translate: 'Dashboard',
 				type: 'item',
 				icon: 'whatshot',
-				url: '/example'
+				url: '/dashboard'
 			},
 			{
-				id: 'login-component',
-				title: 'Login',
-				translate: 'LOGIN',
+				id: 'environment-component',
+				title: 'Environment',
+				translate: 'Environment',
 				type: 'item',
 				icon: 'whatshot',
-				url: '/login'
-			}
+				url: '/environment'
+			},
+			{
+				id: 'apps-component',
+				title: 'Apps',
+				translate: 'Apps',
+				type: 'item',
+				icon: 'whatshot',
+				url: '/apps'
+			},
+			{
+				id: 'project-component',
+				title: 'Project',
+				translate: 'Project',
+				type: 'item',
+				icon: 'whatshot',
+				url: '/project'
+			},
 		]
 	}
 ];

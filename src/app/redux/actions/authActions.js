@@ -1,8 +1,8 @@
-import { LOGIN_SUCCESS } from '../types/authTypes';
+import { REGISTER_SUCCESS } from '../types/authTypes';
 
 export const setUser = (data) => {
     return {
-        type: LOGIN_SUCCESS,
+        type: REGISTER_SUCCESS,
         payload: data
     }
 }

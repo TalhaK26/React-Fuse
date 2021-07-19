@@ -64,11 +64,11 @@ function Login() {
 	});
 
     useEffect(() => {
-        dispatch(setUser({
-            name: 'Test',
-            role: 'super admin',
-            profile: 'test.png',
-        }));
+        // dispatch(setUser({
+        //     name: 'Test',
+        //     role: 'super admin',
+        //     profile: 'test.png',
+        // }));
     }, [])
 
 	const { isValid, dirtyFields, errors } = formState;

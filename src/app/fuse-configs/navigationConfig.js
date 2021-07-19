@@ -24,28 +24,28 @@ const navigationConfig = [
 				url: '/dashboard'
 			},
 			{
-				id: 'environment-component',
-				title: 'Environment',
-				translate: 'Environment',
+				id: 'quick-start-component',
+				title: 'Quick Start',
+				translate: 'Quick Start',
 				type: 'item',
 				icon: 'whatshot',
-				url: '/environment'
+				url: '/quick-start'
 			},
 			{
-				id: 'apps-component',
-				title: 'Apps',
-				translate: 'Apps',
+				id: 'connection-component',
+				title: 'Connection',
+				translate: 'Connection',
 				type: 'item',
 				icon: 'whatshot',
-				url: '/apps'
+				url: '/connection'
 			},
 			{
-				id: 'project-component',
-				title: 'Project',
-				translate: 'Project',
+				id: 'administration-component',
+				title: 'Administration',
+				translate: 'Administration',
 				type: 'item',
 				icon: 'whatshot',
-				url: '/project'
+				url: '/administration'
 			},
 		]
 	}

@@ -1,26 +1,26 @@
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
-import { darken } from '@material-ui/core/styles/colorManipulator';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { submitRegister } from 'app/auth/store/registerSlice';
 import * as yup from 'yup';
 import _ from '@lodash';
+
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import { setUser } from '../../redux/actions/authActions';
+import { getCountries, registerUser } from '../../services/auth/auth.service';
+
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -36,25 +36,36 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const defaultValues = {
-	displayName: '',
+	firstName: '',
+	lastName: '',
 	email: '',
-	password: '',
-	passwordConfirm: ''
+	companyName: '',
+	phoneNumber: '',
+	countryCode: '',
+	// email: '',
+	// password: '',
+	// passwordConfirm: ''
 };
 
 const schema = yup.object().shape({
-	displayName: yup.string().required('You must enter display name'),
+	firstName: yup.string().required('You must enter first name'),
+	lastName: yup.string().required('You must enter last name'),
 	email: yup.string().email('You must enter a valid email').required('You must enter a email'),
-	password: yup
-		.string()
-		.required('Please enter your password.')
-		.min(8, 'Password is too short - should be 8 chars minimum.'),
-	passwordConfirm: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
+	companyName: yup.string().required('You must enter company name'),
+	phoneNumber: yup.string().required('You phone number'),
+	countryCode: yup.string().required('You must select country code'),
+	// password: yup
+	// 	.string()
+	// 	.required('Please enter your password.')
+	// 	.min(8, 'Password is too short - should be 8 chars minimum.'),
+	// passwordConfirm: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
 });
 
 function Register() {
 	const classes = useStyles();
-	const [selectedTab, setSelectedTab] = useState(0);
+    const [countries, setCountries] = useState(null);
+    const [selectedCountryCode, setselectedCountryCode] = useState(null);
+    const dispatch = useDispatch();
 
     const { control, formState, handleSubmit, reset, setError } = useForm({
 		mode: 'onChange',
@@ -62,8 +73,36 @@ function Register() {
 		resolver: yupResolver(schema)
 	});
 
+    useEffect(() => {
+        getCountriesList();
+    }, [])
+
+    const getCountriesList = async () => {
+        let _countries = await getCountries();
+        setCountries(_countries);
+    }
+
+    const handleInputChange = (event) => setselectedCountryCode(event.target.value);
+    const handleCountryChange = (event) => setselectedCountryCode(event.target.value);
+
+    const onSubmit = async (data) => {
+        console.log('data', data)
+        let _data = {
+            first_name: data.firstName,
+            last_name: data.lastName,
+            email: data.email,
+            company_name: data.companyName,
+            phone_number: data.phoneNumber,
+            country_code: data.countryCode,
+        }
+        let user = await registerUser(_data);
+        if(user) dispatch(setUser(user));
+    }
 	const { isValid, dirtyFields, errors } = formState;
 
+    console.log('selectedCountryCode', selectedCountryCode)
+    console.log('schema', schema)
+    console.log('control', control)
 	return (
 		<div
 			className={clsx(
@@ -96,19 +135,45 @@ function Register() {
 						<>
                             <div className="w-full">
                                 <form className="flex flex-col justify-center w-full" 
-                                    // onSubmit={handleSubmit(onSubmit)}
+                                    onSubmit={handleSubmit(onSubmit)}
                                 >
                                     <Controller
-                                        name="displayName"
+                                        name="firstName"
                                         control={control}
                                         render={({ field }) => (
                                             <TextField
                                                 {...field}
                                                 className="mb-16"
                                                 type="text"
-                                                label="Display name"
-                                                error={!!errors.displayName}
-                                                helperText={errors?.displayName?.message}
+                                                label="First Name"
+                                                error={!!errors.firstName}
+                                                helperText={errors?.firstName?.message}
+                                                InputProps={{
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            <Icon className="text-20" color="action">
+                                                                person
+                                                            </Icon>
+                                                        </InputAdornment>
+                                                    )
+                                                }}
+                                                variant="outlined"
+                                                required
+                                            />
+                                        )}
+                                    />
+
+                                    <Controller
+                                        name="lastName"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <TextField
+                                                {...field}
+                                                className="mb-16"
+                                                type="text"
+                                                label="Last Name"
+                                                error={!!errors.lastName}
+                                                helperText={errors?.lastName?.message}
                                                 InputProps={{
                                                     endAdornment: (
                                                         <InputAdornment position="end">
@@ -151,6 +216,108 @@ function Register() {
                                     />
 
                                     <Controller
+                                        name="companyName"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <TextField
+                                                {...field}
+                                                className="mb-16"
+                                                type="text"
+                                                label="Company Name"
+                                                error={!!errors.companyName}
+                                                helperText={errors?.companyName?.message}
+                                                InputProps={{
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            <Icon className="text-20" color="action">
+                                                                person
+                                                            </Icon>
+                                                        </InputAdornment>
+                                                    )
+                                                }}
+                                                variant="outlined"
+                                                required
+                                            />
+                                        )}
+                                    />
+
+                                    <Controller
+                                        name="phoneNumber"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <TextField
+                                                {...field}
+                                                className="mb-16"
+                                                type="number"
+                                                label="Phone Number"
+                                                error={!!errors.phoneNumber}
+                                                helperText={errors?.phoneNumber?.message}
+                                                InputProps={{
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            <Icon className="text-20" color="action">
+                                                                person
+                                                            </Icon>
+                                                        </InputAdornment>
+                                                    )
+                                                }}
+                                                variant="outlined"
+                                                required
+                                            />
+                                        )}
+                                    />
+
+                                    <Controller
+                                        name="countryCode"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <>
+                                                <InputLabel id="demo-simple-select-label">Country Code</InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-label"
+                                                    id="demo-simple-select"
+                                                    value={selectedCountryCode?selectedCountryCode:''}
+                                                    onChange={handleCountryChange}
+
+                                                    {...field}
+                                                    error={!!errors.phoneNumber}
+                                                    helperText={errors?.phoneNumber?.message}
+
+                                                > 
+                                                {countries ? countries.map((country, index) => {
+                                                    return <MenuItem key={index} value={country.code}>{country.name} - {country.code}</MenuItem>
+                                                }) : <MenuItem value={0}></MenuItem>}
+                                                </Select>
+                                            </>
+                                        )}
+                                    />
+
+                                    {/* <FormControl className={classes.formControl}>
+                                        <InputLabel id="demo-simple-select-label">Country Code</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            value={selectedCountryCode?selectedCountryCode:''}
+                                            onChange={handleCountryChange}
+                                        > 
+                                        {countries ? countries.map((country, index) => {
+                                            return <MenuItem key={index} value={country.code}>{country.name} - {country.code}</MenuItem>
+                                        }) : <MenuItem value={0}></MenuItem>}
+                                        </Select>
+                                    </FormControl> */}
+
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        color="primary"
+                                        className="w-full mx-auto mt-16"
+                                        aria-label="REGISTER"
+                                        disabled={_.isEmpty(dirtyFields) || !isValid}
+                                        value="legacy"
+                                    > Register
+                                    </Button>
+
+                                    {/* <Controller
                                         name="password"
                                         control={control}
                                         render={({ field }) => (
@@ -200,19 +367,8 @@ function Register() {
                                                 required
                                             />
                                         )}
-                                    />
+                                    /> */}
 
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
-                                        className="w-full mx-auto mt-16"
-                                        aria-label="REGISTER"
-                                        disabled={_.isEmpty(dirtyFields) || !isValid}
-                                        value="legacy"
-                                    >
-                                        Register
-                                    </Button>
                                 </form>
                             </div>
                         </>

@@ -4,6 +4,7 @@ import withReducer from 'app/store/withReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import Datatable from '../../shared-components/Datatable';
+import PageHeader from '../../shared-components/PageHeader';
 
 const item = {
 	hidden: { opacity: 0, y: 20 },
@@ -19,8 +20,8 @@ function Dashboard() {
 	
 	return (
 		<div className="w-full">
-			<motion.div variants={item} className="widget w-full p-16 pb-48">
-				<h2>Dashboard</h2>
+			<motion.div variants={item} className="w-full p-16 pb-48">
+				<PageHeader />
 				<Datatable />
 			</motion.div>
 		</div>

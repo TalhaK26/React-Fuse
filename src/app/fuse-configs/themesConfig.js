@@ -2,7 +2,7 @@ import { fuseDark, skyBlue } from '@fuse/colors';
 import { lightBlue, red } from '@material-ui/core/colors';
 
 const lightText = {
-	primary: 'rgb(17, 24, 39)',
+	primary: '#5A4E93',
 	secondary: 'rgb(107, 114, 128)',
 	disabled: 'rgb(149, 156, 169)'
 };

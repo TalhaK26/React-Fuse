@@ -10,6 +10,8 @@ import AppsConfig from 'app/main/apps/AppsConfig';
 import EnvironmentConfig from 'app/main/environment/EnvironmentConfig';
 import ProjectConfig from 'app/main/project/ProjectConfig';
 import QuickStartConfig from 'app/main/quick-start/QuickStartConfig';
+import ConnectionConfig from 'app/main/connection/ConnectionConfig';
+import AdministrationConfig from 'app/main/administration/AdministrationConfig';
 
 const routeConfigs = [
 	// ExampleConfig,
@@ -21,7 +23,9 @@ const routeConfigs = [
 	AppsConfig,
 	EnvironmentConfig,
 	ProjectConfig,
-	QuickStartConfig
+	QuickStartConfig,
+	ConnectionConfig,
+	AdministrationConfig
 ];
 
 const routes = [
